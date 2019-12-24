@@ -1,0 +1,5 @@
+*.pyc
+__pycache__/*
+.vscode/*
+config.bat
+*.mypy_cache/*
