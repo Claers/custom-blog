@@ -20,7 +20,6 @@ def index():
         article = articles[0]
         article.name = "ModifArticle3"
     g.article = article
-    g.about = "active"
     return render_template("base.html")
 
 
