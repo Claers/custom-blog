@@ -1,0 +1,22 @@
+body {
+    background-color: #222831;
+    font-family: 'Lato', sans-serif;
+    color: white;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+nav {
+    background-color: #393e46;
+}
+
+.brand {
+    font-size: 0.8em;
+}
+
+.active {}

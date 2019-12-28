@@ -1,0 +1,18 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic@6/picnic.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<nav>
+      <a href="#" class="brand"><h1 class="site-name">Flokami Blog</h1></a>
+      <div class="menu">
+          <a class="pseudo button {{ g.about }}" href="/me">A propos</a>
+          <a class="pseudo button {{ g.contact }}" href="/contact">Contact</a>
+      </div>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}{% endblock %}
+</section>

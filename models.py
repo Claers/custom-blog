@@ -9,6 +9,7 @@ from sqlalchemy_utils import URLType
 from sqlalchemy.orm import sessionmaker, relationship
 from .settings import DB_NAME, DB_PASSWORD, DB_USER, DB_HOST
 
+
 def get_url():
     return "postgresql+psycopg2://%s:%s@%s/%s" % (
         DB_USER,
