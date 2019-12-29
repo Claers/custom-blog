@@ -3,3 +3,4 @@ __pycache__/*
 .vscode/*
 config.bat
 *.mypy_cache/*
+config
