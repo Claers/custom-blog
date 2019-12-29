@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy import ForeignKey, Boolean, Table
 from sqlalchemy_utils import URLType
 from sqlalchemy.orm import sessionmaker, relationship
-from .settings import DB_NAME, DB_PASSWORD, DB_USER, DB_HOST
+from settings import DB_NAME, DB_PASSWORD, DB_USER, DB_HOST
 
 
 def get_url():
@@ -18,6 +18,7 @@ def get_url():
         DB_NAME,
     )
 
+print(get_url())
 
 Base = declarative_base()
 engine = create_engine(get_url())

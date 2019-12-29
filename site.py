@@ -2,8 +2,7 @@
 """
 
 from flask import Flask, render_template, g
-from .settings import DB_NAME, DB_PASSWORD, DB_USER, DB_HOST
-from . import models
+import models
 
 app = Flask(__name__)
 
