@@ -3,6 +3,7 @@
 
 from flask import Flask, render_template, g
 import models
+from settings import SECRET
 
 app = Flask(__name__)
 
@@ -10,7 +11,6 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     articles = models.session.query(models.Article).all()
-    print(articles[0].name)
     if not articles:
         article = models.Article(name="TestArticle")
         models.session.add(article)
@@ -18,9 +18,9 @@ def index():
     else:
         article = articles[0]
         article.name = "ModifArticle3"
-    g.article = article
     return render_template("base.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.secret_key = SECRET
+    app.run(debug=True, host="0.0.0.0", port="8000")
