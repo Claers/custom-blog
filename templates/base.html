@@ -1,25 +1,130 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Comming Soon - Flokami Blog</title>
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.css') }}" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic@6/picnic.min.css">
-<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<nav>
-      <a href="#" class="brand"><h1 class="site-name">Flokami Blog</h1></a>
-      <div class="menu">
-          <a class="pseudo button {{ g.about }}" href="/me">A propos</a>
-          <a class="pseudo button {{ g.contact }}" href="/contact">Contact</a>
-      </div>
-</nav>
-<main>
-  <header class="hero">
-    <div class="content">
-      <h1>COMMING SOON</h1>
-      {% block header %}{% endblock %}
-    </div>
-  </header>
-  {% block content %}
-  <div class="visual flex one two-800"></div>
-  <div class="visual flex one two-800"></div>
-  {% endblock %}
-</main>
+<html lang="fr">
+<head>
+  <title>{% block title %}{% endblock %} - Flokami Blog</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="{% block description %}{% endblock %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon"/>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/particle.css') }}">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/default.min.css">
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+<body>
+  <!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+  <!-- Header section -->
+	<header class="header-section">
+		<div class="header-warp">
+			<div class="header-social d-flex justify-content-end">
+				<p>Follow me:</p>
+				<a href="{{ facebook_link }}"><i class="fa fa-facebook"></i></a>
+				<a href="{{ twitter_link }}"><i class="fa fa-twitter"></i></a>
+			</div>
+			<div class="header-bar-warp d-flex">
+				<!-- site logo -->
+				<a href="{{ url_for('index') }}" class="site-name">
+					<p class="site-name">Flokami</p>
+				</a>
+				<nav class="top-nav-area w-100">
+					<!--
+					<div class="user-panel">
+						<a href="">Login</a> / <a href="">Register</a>
+					</div>
+					--> 
+					<!-- Menu -->
+					<ul class="main-menu primary-menu">
+						<li class="{{ home_active }}"><a href="{{ url_for('index') }}">Home</a></li>
+						<!-- class="main-dropdown-menu" -->
+						<li><a href="games.html">Games</a>
+						<!--
+							<ul class="sub-menu">
+								<li><a href="game-single.html">Game Singel</a></li>
+							</ul>
+							-->
+						</li>
+						<li class="{{ article_active }}"><a href="{{ url_for('articles') }}">Articles</a></li>
+						<li class="{{ blog_active }}"><a href="{{ url_for('edit_article', id=1, token=0) }}">News</a></li>
+						<li class="{{ contact_active }}"><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<!-- Header section end -->
+	{% block content %}
+	{% endblock %}
+
+	<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="container">
+			<a href="#" class="footer-logo">
+				<h3 style="color:white;margin-bottom:1rem;">Flokami</h3>
+				<img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+			</a>
+			<ul class="main-menu footer-menu">
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('index') }}">Games</a></li>
+				<li><a href="{{ url_for('index') }}">Articles</a></li>
+				<li><a href="{{ url_for('index') }}">News</a></li>
+				<li><a href="{{ url_for('index') }}">Contact</a></li>
+			</ul>
+			<div class="footer-social d-flex justify-content-center">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+			</div>
+			<div class="copyright"><a href="">Colorlib</a> 2018 @ All rights reserved</div>
+		</div>
+	</footer>
+	<!-- Footer section end -->
+
+<!--====== Javascripts & Jquery ======-->
+	<script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.slicknav.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.sticky-sidebar.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+	<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf-8">
+		var io = io().connect('http://localhost:8000/');
+
+		io.on('connect', function() {
+				io.emit("join", {"room":"test room"})
+			});
+
+		io.on('test', function(msg) {
+				console.log(msg)
+			});
+
+		
+	</script>
+  
+	</body>
+</html>

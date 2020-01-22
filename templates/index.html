@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %} Acceuil {% endblock %}
+
+{% block content %}
+    <!-- Hero section -->
+	<section class="hero-section overflow-hidden">
+		<div class="hero-slider">
+			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="{{ url_for('static', filename='img/bg-1.png') }}">
+				<div id="particles-js"></div>
+				<div class="container">
+					<h2>Hellow !</h2>
+					<h4 style="color:white;">Moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity.</h4 >
+					<h4  style="color:white;">Vous êtes ici sur mon blog. Au menu :</h4 >
+					<p style="color:white;">Jeux vidéo, musique, animé, série et mes projets perso !</p>
+					<a href="#" class="site-btn">Mon CV  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end-->
+
+    
+    {% if games %}
+    <!-- Intro section -->
+    <section class="intro-section">
+	<h2 style="color:white; text-align:center;margin-bottom:80px">Mes jeux</h2>
+		<div class="container">
+			<div class="row">
+                {% if games|length == 1 %}
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4" style="margin-left:3.5rem;">
+					<div class="intro-text-box text-box text-white">
+						<div style="color:white;" class="top-meta">{{ games[0].date }}  /  in <a href="">Games</a></div>
+						<a href="#" class="article-title"><h3>{{games[0]}}</h3></a>
+						<p>{{ games[0].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                {% endif %}
+				{% if games|length == 2 %}
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+					<div class="intro-text-box text-box">
+						<div style="color:white;" class="top-meta">{{  games[0].date }}  /  in <a href="">Playstation</a></div>
+                        <img class="img-shadow" src="{{ url_for('static', filename='img/bg-1.png') }}" alt="">
+						<a href="#" class="article-title"><h3>{{ games[0].title }}</h3></a>
+						<p style="color:white;">{{ games[0].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                <div class="col-md-4" style="margin-left:1rem;">
+					<div class="intro-text-box text-box">
+						<div style="color:white;" class="top-meta">{{  games[1].date }}  /  in <a href="#">Games</a></div>
+						<a href="#" class="article-title"><h3>{{ games[1].title }}</h3></a>
+						<p style="color:white;">{{ games[0].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                {% endif %}
+                {% if games|length == 3%}
+                <div class="col-md-4">
+					<div class="intro-text-box text-box">
+						<div style="color:white;" class="top-meta">{{  games[0].date }}  /  in <a href="">Playstation</a></div>
+                        <img class="img-shadow" src="{{ url_for('static', filename='img/bg-1.png') }}" alt="">
+						<a href="#" class="article-title"><h3>{{ games[0].title }}</h3></a>
+						<p style="color:white;">{{ games[0].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                <div class="col-md-4" style="margin-left:1rem;">
+					<div class="intro-text-box text-box">
+						<div style="color:white;" class="top-meta">{{ games[1].date }}  /  in <a href="#">Games</a></div>
+						<a href="#" class="article-title"><h3>{{ games[1].title }}</h3></a>
+						<p style="color:white;">{{ games[1].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                <div class="col-md-4" style="margin-left:1rem;">
+					<div class="intro-text-box text-box">
+						<div style="color:white;" class="top-meta">{{ games[2].date }}  /  in <a href="#">Games</a></div>
+						<a href="#" class="article-title"><h3>{{ games[2].title }}</h3></a>
+						<p style="color:white;">{{ games[2].desc }}</p>
+						<a href="#" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+					</div>
+				</div>
+                {% endif %}
+			</div>
+		</div>
+	</section>
+	<!-- Intro section end -->
+    {% endif %}
+
+    {% if articles %}
+        <!-- Blog section -->
+	<section class="blog-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 col-lg-8 col-md-7">
+				
+					<div class="section-title text-white">
+						<h2>Dernier Articles</h2>
+					</div>
+					<!--
+					<ul class="blog-filter">
+						<li><a href="#">Racing</a></li>
+						<li><a href="#">Shooters</a></li>
+						<li><a href="#">Strategy</a></li>
+						<li><a href="#">Online</a></li>
+					</ul>
+					-->
+					{% for article in articles %}
+					<!-- Blog item -->
+					<div class="blog-item">
+						<div class="blog-thumb">
+							<img class="img-art-shadow" src="{{ article.desc_img_url }}" alt="">
+						</div>
+						<div class="blog-text text-box text-white">
+							<div class="top-meta">{{ article.date }} / in <a href="#">Games</a></div>
+							<h3>{{ article.id }} - {{ article.name }}</h3>
+							<p>{{ article.description }}</p>
+							<a href="#" class="read-more">Read More <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#" /></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="col-xl-3 col-lg-4 col-md-5 sidebar">
+					<div id="stickySidebar">
+						<div class="widget-item">
+							<h4 class="widget-title">Epinglé</h4>
+							<div class="trending-widget">
+								{% for pin in pinned %}
+								<div class="tw-item">
+									<div class="tw-thumb">
+										<img src="{{ pin.desc_img_url }}" alt="#">
+									</div>
+									<div class="tw-text">
+										<div class="tw-meta">{{ pin.date }}  /  in <a href="">Games</a></div>
+										<h5>{{ pin.id }} - {{ pin.name }}</h5>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="widget-item">
+							<div class="categories-widget">
+								<h4 class="widget-title">categories</h4>
+								<ul>
+									<li><a href="">Games</a></li>
+									<li><a href="">Gaming Tips & Tricks</a></li>
+									<li><a href="">Online Games</a></li>
+									<li><a href="">Team Games</a></li>
+									<li><a href="">Community</a></li>
+									<li><a href="">Uncategorized</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+    {% endif %}
+
+{% endblock %}
+

@@ -4,7 +4,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy import ForeignKey, Boolean, Table
+from sqlalchemy import ForeignKey, Boolean, Table, LargeBinary
 from sqlalchemy_utils import URLType
 from sqlalchemy.orm import sessionmaker, relationship
 from settings import DB_NAME, DB_PASSWORD, DB_USER, DB_HOST
@@ -18,7 +18,6 @@ def get_url():
         DB_NAME,
     )
 
-print(get_url())
 
 Base = declarative_base()
 engine = create_engine(get_url())
@@ -33,6 +32,35 @@ class Article(Base):
     __tablename__ = "article"
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    content = Column(String)
+    description = Column(String)
+    desc_img = Column(LargeBinary)
+    desc_img_url = Column(URLType)
+    img = Column(LargeBinary)
+    img_url = Column(URLType)
+    pinned = Column(Boolean)
+    categories = Column(String)
+
+    def json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'content': self.content
+        }
 
 
-Base.metadata.create_all(engine)
+class GameArticle(Base):
+    """A game article model
+
+    Arguments:
+        Article {[type]} -- [description]
+    """
+    __tablename__ = "game_article"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    content = Column(String)
+    desc_img = Column(LargeBinary)
+    img = Column(LargeBinary)
+    game_url = Column(URLType)
+
+

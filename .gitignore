@@ -4,3 +4,5 @@ __pycache__/*
 config.bat
 *.mypy_cache/*
 config
+*alembic/versions/*
+*static/uploads/*
