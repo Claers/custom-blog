@@ -32,30 +32,6 @@ def social_links():
 
 @app.route("/")
 def index():
-    games = [
-        {
-            "name": "test1",
-            "desc": "This is a test",
-            "date": "01/01/2020"
-        },
-        {
-            "name": "test2",
-            "desc": "This is a test dfqsf sdfsdfsd ",
-            "date": "02/01/2020"
-        }
-    ]
-    articles = [
-        {
-            "name": "test1",
-            "desc": "This is a test",
-            "date": "01/01/2020"
-        },
-        {
-            "name": "test2",
-            "desc": "This is a test dfqsf sdfsdfsd ",
-            "date": "02/01/2020"
-        }
-    ]
     articles = models.session.query(models.Article).order_by(
         models.Article.id.asc()).all()
     print([article.pinned for article in articles])
@@ -145,4 +121,4 @@ def handle_my_custom_event(json):
 if __name__ == "__main__":
     app.secret_key = SECRET
     app.debug = True
-    socketio.run(app, port=8000)
+    app.run(port=8000)

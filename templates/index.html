@@ -2,6 +2,16 @@
 
 {% block title %} Acceuil {% endblock %}
 
+{% block twicard %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Flo_Okami">
+<meta name="twitter:creator" content="@Flo_Okami">
+<meta name="twitter:title" content="Acceuil">
+<meta name="twitter:description" content="Moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity. Vous êtes ici sur mon blog. Au menu : Jeux vidéo, musique, animé, série et mes projets perso !">
+<meta name="twitter:image" content="{{ url_for('static', filename='img/favicon.ico') }}">
+{% endblock %}
+
+
 {% block content %}
     <!-- Hero section -->
 	<section class="hero-section overflow-hidden">

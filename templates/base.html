@@ -5,6 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="description" content="{% block description %}{% endblock %}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	{% block twicard %}{% endblock %}
+	
 	<!-- Favicon -->
 	<link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon"/>
 
@@ -112,19 +115,5 @@
 	<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-	<script type="text/javascript" charset="utf-8">
-		var io = io().connect('http://localhost:8000/');
-
-		io.on('connect', function() {
-				io.emit("join", {"room":"test room"})
-			});
-
-		io.on('test', function(msg) {
-				console.log(msg)
-			});
-
-		
-	</script>
-  
 	</body>
 </html>
