@@ -39,7 +39,7 @@ def index():
     pinned = models.session.query(models.Article).filter(models.Article.pinned == True).order_by(
         models.Article.id.asc()).all()
     print(pinned)
-    return render_template("index.html", home_active="active", games=games,
+    return render_template("index.html", home_active="active", games=[],
                            articles=articles, pinned=pinned)
 
 
