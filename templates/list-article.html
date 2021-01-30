@@ -26,13 +26,13 @@
                     <!-- Blog item -->
 					<div class="blog-item">
 						<div class="blog-thumb">
-							<img class="img-art-shadow" src="{{ article.desc_img_url }}" alt="">
+							<img class="img-art-shadow" src="{{ url_for('custom_static', id=article.id ,filename=article.desc_img_url) }}" alt="">
 						</div>
 						<div class="blog-text text-box text-white">
 							<div class="top-meta">{{ article.date }}  /  in <a href="">Games</a></div>
-							<h3>{{ article.id }} {{ article.name }}</h3>
+							<h3>{{ article.title }}</h3>
 							<p>{{ article.description }}</p>
-							<a href="{{ url_for('article',id=article.id) }}" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+							<a href="{{ url_for('article',id=article.name) }}" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
 						</div>
 					</div>
                     {% endfor %}

@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	{% block twicard %}{% endblock %}
+	{% block fbcard %}{% endblock %}
 	
 	<!-- Favicon -->
 	<link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon"/>
@@ -69,7 +70,6 @@
 							-->
 						</li>
 						<li class="{{ article_active }}"><a href="{{ url_for('articles') }}">Articles</a></li>
-						<li class="{{ blog_active }}"><a href="{{ url_for('edit_article', id=1, token=0) }}">News</a></li>
 						<li class="{{ contact_active }}"><a href="contact.html">Contact</a></li>
 					</ul>
 				</nav>
@@ -85,7 +85,7 @@
 		<div class="container">
 			<a href="#" class="footer-logo">
 				<h3 style="color:white;margin-bottom:1rem;">Flokami</h3>
-				<img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+				<img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="100vw" height="100vh">
 			</a>
 			<ul class="main-menu footer-menu">
 				<li><a href="{{ url_for('index') }}">Home</a></li>
@@ -95,10 +95,11 @@
 				<li><a href="{{ url_for('index') }}">Contact</a></li>
 			</ul>
 			<div class="footer-social d-flex justify-content-center">
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="{{ facebook_link }}" target=”_blank”><i class="fa fa-facebook"></i></a>
+				<a href="{{ twitter_link }}" target=”_blank”><i class="fa fa-twitter"></i></a>
 			</div>
-			<div class="copyright"><a href="">Colorlib</a> 2018 @ All rights reserved</div>
+			<div class="copyright"><a href="https://colorlib.com/wp/template/endgam/">Colorlib</a> 2018 @ All rights reserved</div>
+			<div class="copyright"><a href="https://www.freepik.com/vectors/background">Background vector created by inventsolutions - www.freepik.com</a></div>
 		</div>
 	</footer>
 	<!-- Footer section end -->

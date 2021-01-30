@@ -2,26 +2,18 @@
 """
 
 import os 
+import sys
 
 from flask import Flask, render_template, g, request, redirect, url_for
-import models
-from settings import SECRET, TOKEN
-from flaskext.markdown import Markdown
-from forms import ArticleForm
-from werkzeug.utils import secure_filename
-from flask_uploads import UploadSet, IMAGES, configure_uploads
-from flask_uploads import patch_request_class
+from flask.helpers import send_from_directory
+from settings import SECRET, ARTICLES_PATH, ARTICLES_STATIC_PATH
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
+from articles import Article, Paragraph
 
 app = Flask(__name__)
-Markdown(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, './static/uploads')
 socketio = SocketIO(app)
-
-uploads = UploadSet('photos', IMAGES)
-configure_uploads(app, uploads)
-patch_request_class(app)  # set maximum file size, default is 16MB
 
 
 @app.context_processor
@@ -32,72 +24,29 @@ def social_links():
 
 @app.route("/")
 def index():
-    articles = models.session.query(models.Article).order_by(
-        models.Article.id.asc()).all()
-    print([article.pinned for article in articles])
-    articles = articles[len(articles)-3:len(articles)]
-    pinned = models.session.query(models.Article).filter(models.Article.pinned == True).order_by(
-        models.Article.id.asc()).all()
-    print(pinned)
+    articles = []
+    for article_json in os.listdir(ARTICLES_PATH):
+        articles.append(Article(os.path.join(ARTICLES_PATH,article_json)))
+    pinned = [Article(os.path.join(ARTICLES_PATH, "bienvenue.json"))]
     return render_template("index.html", home_active="active", games=[],
                            articles=articles, pinned=pinned)
 
-
-@app.route("/edit-article/<id>/<token>", methods=['GET', 'POST'])
-def edit_article(id, token):
-    if token != TOKEN:
-        return "Fuck off"
-    else:
-        article = models.session.query(models.Article).get(id)
-        article_edit = ArticleForm(obj=article)
-        if article_edit.validate_on_submit():
-            article = models.session.query(models.Article).get(id)
-            name = article_edit.name.data
-            content = article_edit.content.data
-            pinned = article_edit.pinned.data
-            categories = article_edit.categories.data
-            if article_edit.desc_img.data:
-                desc_img = uploads.save(article_edit.desc_img.data)
-            if article_edit.img.data:
-                img = uploads.save(article_edit.img.data)
-            if article:
-                article.name = name
-                article.content = content
-                article.pinned = pinned
-                article.categories = categories
-                try:
-                    article.desc_img_url = uploads.url(desc_img)
-                except:
-                    pass
-                try:
-                    article.img_url = uploads.url(img)
-                except:
-                    pass
-            else:
-                article = models.Article(id=id, name=name, content=content,
-                                         desc_img_url=uploads.url(desc_img),
-                                         img_url=uploads.url(img),
-                                         pinned=pinned, categories=categories)
-                models.session.add(article)
-        else:
-            return render_template("edit-article.html", form=article_edit)
-        models.session.commit()
-        return redirect(url_for("edit_article", id=id, token=token))
-
+@app.route("/cdn/<id>/<path:filename>")
+def custom_static(id,filename):
+    return send_from_directory(ARTICLES_STATIC_PATH + "/" + id, filename)
 
 @app.route("/article/<id>")
 def article(id):
     if not id or id == "undefined":
         return url_for("index")
     else:
-        article = models.session.query(models.Article).get(id)
+        article = Article(os.path.join(ARTICLES_PATH, id + ".json"))
+        print(article.body[0]["title"], flush=True)
         return render_template("article.html", article=article)
-
 
 @app.route("/articles")
 def articles():
-    articles = models.session.query(models.Article).order_by(
-       models.Article.id.asc()).all()
+    articles = []
     return render_template("list-article.html", article_active="active",
         articles=articles)
 
@@ -121,4 +70,4 @@ def handle_my_custom_event(json):
 if __name__ == "__main__":
     app.secret_key = SECRET
     app.debug = True
-    app.run(port=8000)
+    app.run(host="0.0.0.0",port=8000)

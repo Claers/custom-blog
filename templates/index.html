@@ -6,11 +6,20 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Flo_Okami">
 <meta name="twitter:creator" content="@Flo_Okami">
-<meta name="twitter:title" content="Acceuil">
-<meta name="twitter:description" content="Moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity. Vous êtes ici sur mon blog. Au menu : Jeux vidéo, musique, animé, série et mes projets perso !">
-<meta name="twitter:image" content="{{ url_for('static', filename='img/favicon.ico') }}">
+<meta name="twitter:title" content="Flokami Blog">
+<meta name="twitter:description" content="Hellow moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity. Vous êtes ici sur mon blog. Au menu : Jeux vidéo, musique, animé, série et mes projets perso !">
+<meta name="twitter:image" content="https://flokami.ovh/static/img/WoLfLogo.png">
 {% endblock %}
 
+{% block fbcard %}
+<meta property="og:url"                content="https://flokami.ovh" />
+<meta property="og:type"               content="website" />
+<meta property="og:title"              content="Flokami Blog" />
+<meta property="og:description"        content="Hellow moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity. Vous êtes ici sur mon blog. Au menu : Jeux vidéo, musique, animé, série et mes projets perso !" />
+<meta property="og:image"       		content="https://flokami.ovh/static/img/WoLfLogo.png" />
+{% endblock %}
+
+{% block description %}Hellow moi c'est Flo' (aka Flokami) ! Je suis developpeur Python et Unity. Vous êtes ici sur mon blog. Au menu : Jeux vidéo, musique, animé, série et mes projets perso !{% endblock %}
 
 {% block content %}
     <!-- Hero section -->
@@ -123,14 +132,16 @@
 					{% for article in articles %}
 					<!-- Blog item -->
 					<div class="blog-item">
-						<div class="blog-thumb">
-							<img class="img-art-shadow" src="{{ article.desc_img_url }}" alt="">
-						</div>
+						<a href="{{ url_for('article', id=article.name) }}" >
+							<div class="blog-thumb">
+								<img class="img-art-shadow" src="{{ url_for('custom_static', id=article.id ,filename=article.desc_img_url) }}" alt="">
+							</div>
+						</a>
 						<div class="blog-text text-box text-white">
 							<div class="top-meta">{{ article.date }} / in <a href="#">Games</a></div>
-							<h3>{{ article.id }} - {{ article.name }}</h3>
-							<p>{{ article.description }}</p>
-							<a href="#" class="read-more">Read More <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#" /></a>
+							<h3 ><a href="{{ url_for('article', id=article.name) }}" class="article-title">{{ article.title | safe }}</a></h3>
+							<p>{{ article.description | safe }}</p>
+							<a href="{{ url_for('article', id=article.name) }}" class="read-more">Read More <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#" /></a>
 						</div>
 					</div>
 					{% endfor %}
@@ -143,11 +154,11 @@
 								{% for pin in pinned %}
 								<div class="tw-item">
 									<div class="tw-thumb">
-										<img src="{{ pin.desc_img_url }}" alt="#">
+										<img src="{{ url_for('custom_static', id=pin.id ,filename=pin.desc_img_url) }}" alt="#">
 									</div>
 									<div class="tw-text">
 										<div class="tw-meta">{{ pin.date }}  /  in <a href="">Games</a></div>
-										<h5>{{ pin.id }} - {{ pin.name }}</h5>
+										<h5>{{ pin.id }} - {{ pin.title }}</h5>
 									</div>
 								</div>
 								{% endfor %}

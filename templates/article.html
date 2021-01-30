@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %} Acceuil {% endblock %}
+{% block title %} {{ article.url_title }} {% endblock %}
 
 {% block content %}
 <!-- Hero section -->
 	<section class="hero-section overflow-hidden">
 		<div class="hero-slider">
         {% if article.img_url %}
-			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" style="height: 25rem;" data-setbg="{{ article.img_url }}">
+			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" style="height: 25rem;" data-setbg="{{ url_for('custom_static', id=article.id ,filename=article.img_url) }}">
         {% else %}
             <div class="hero-item set-bg d-flex align-items-center justify-content-center text-center no-img-background" style="height: 25rem;">
         {% endif %}
 				<div class="container">
-					<h3 style="color:white;">{{ article.name }}</h3>
+					<h3 style="color:white;">{{ article.title | safe }}</h3>
 				</div>
 			</div>
 		</div>
@@ -20,11 +20,20 @@
 	<!-- Hero section end-->
 
     <!-- Blog section -->
-	<section class="blog-section spad" style="padding-top:13rem;">
+	<section class="blog-section spad text-white d-flex" style="padding-top:13rem;">
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-9 col-lg-8 col-md-7">
-                    {{ article.content|markdown }}
+				<div class="col-xl-12 col-lg-8 col-md-7 article-section" style="text-align: center;">
+					{% for section in article.body %}
+						<div>{{ section["title"] | safe }}</div>
+						{% if section["content"] is not string %}
+							{% for line in section["content"] %}
+								{{ line | safe }}
+							{% endfor %}
+						{% else %}
+							<div>{{ section["content"] | safe }}</div>
+						{% endif %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>

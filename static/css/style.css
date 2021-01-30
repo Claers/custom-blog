@@ -335,7 +335,7 @@ ol {
 	justify-content: center;
 	border-radius: 50%;
 	color: #fff;
-	font-size: 12px;
+	font-size: 24px;
 	margin-left: 13px;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -673,6 +673,10 @@ ol {
 
 .text-box .read-more img {
 	margin-left: 13px;
+}
+
+.text-box .article-title {
+	color: rgba(252, 44, 71, 0.64);
 }
 
 /* ----------------
@@ -1094,9 +1098,9 @@ ol {
 }
 
 .copyright {
-	font-size: 12px;
-	font-weight: 500;
-	color: #9190a5;
+	font-size: 13px;
+	font-weight: 600;
+	color: #b5b4bd;
 	opacity: 0.20;
 }
 
@@ -1837,4 +1841,8 @@ textarea {
 
 #description {
 	height: 150px;
+}
+
+.article-section div {
+	margin-bottom: 3%;
 }
