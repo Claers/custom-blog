@@ -374,7 +374,7 @@ ol {
 	height: 50px;
 	top: 0px;
 	left: -2rem;
-	background-image: url("../img/logo.png");
+	background-image: url("https://flokami.ovh/static/img/logo.png");
 	background-size: 50px 50px;
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -436,7 +436,7 @@ ol {
 	height: 20px;
 	right: 0;
 	top: 1px;
-	background-image: url("../img/icons/arrow-down.png");
+	background-image: url("https://flokami.ovh/static/img/icons/arrow-down.png");
 	background-repeat: no-repeat;
 	background-position: right center;
 }
@@ -451,7 +451,7 @@ ol {
 }
 
 .main-menu li a:hover:after {
-	background-image: url("../img/icons/arrow-down-color.png");
+	background-image: url("https://flokami.ovh/static/img/icons/arrow-down-color.png");
 }
 
 .main-menu li a:hover i {
@@ -469,7 +469,7 @@ ol {
 }
 
 .main-menu li:hover>a:after {
-	background-image: url("../img/icons/arrow-down-color.png");
+	background-image: url("https://flokami.ovh/static/img/icons/arrow-down-color.png");
 }
 
 .main-menu li .sub-menu {
@@ -701,6 +701,14 @@ ol {
 	margin-bottom: 25px;
 }
 
+.blog-section a {
+	color: #fc1937;
+}
+
+.blog-section a:hover {
+	color:  #c7152d;
+}
+
 .blog-filter {
 	list-style: none;
 	display: block;
@@ -820,7 +828,7 @@ ol {
 	-webkit-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	transition: all 0.2s;
-	background-image: url("../img/icons/double-arrow.png");
+	background-image: url("https://flokami.ovh/static/img/icons/double-arrow.png");
 	background-repeat: no-repeat;
 	background-position: right -120% center;
 	background-size: 11px;
@@ -828,6 +836,49 @@ ol {
 
 .categories-widget ul li a:hover {
 	color: #fc1937a2;
+	background-position: right center;
+}
+
+.categories-list{
+	padding: 55px 0 25px;
+}
+
+.categories-list ul {
+	list-style: none;
+	padding: 0 38px;
+}
+
+.categories-list ul li {
+	display: block;
+	margin-bottom: 1.5em;
+	padding-left: 0.5em; 
+	border-left-style: solid;
+	border-left-width: 0.1em;
+	border-left-color: #000000;
+	border-bottom-style: solid;
+	border-bottom-width: 0.1em;
+	border-bottom-color: #000000;
+	border-bottom-left-radius: 0.3em;
+}
+
+.categories-list ul li a {
+	display: inline-block;
+	position: relative;
+	font-size: 16px;
+	color: #fc1937a2;
+	font-weight: 500;
+	padding-right: 19px;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+	background-image: url("https://flokami.ovh/static/img/icons/double-arrow.png");
+	background-repeat: no-repeat;
+	background-position: right -120% center;
+	background-size: 11px;
+}
+
+.categories-list ul li a:hover {
+	color: #c7152da2;
 	background-position: right center;
 }
 

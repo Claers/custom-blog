@@ -2,18 +2,42 @@
 
 {% block title %} Acceuil {% endblock %}
 
+{% block twicard %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Flo_Okami">
+<meta name="twitter:creator" content="@Flo_Okami">
+<meta name="twitter:title" content="Flokami Blog - Articles">
+<meta name="twitter:description" content="Voici les articles sortit sur mon site">
+<meta name="twitter:image" content="https://flokami.ovh/static/img/WoLfLogo.png">
+{% endblock %}
+
+{% block fbcard %}
+<meta property="og:url" content="https://flokami.ovh/articles" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Flokami Blog - Articles" />
+<meta property="og:description" content="Voici les articles sortit sur mon site" />
+<meta property="og:image" content="https://flokami.ovh/static/img/WoLfLogo.png" />
+{% endblock %}
+
+{% block description %}Voici les articles sortit sur mon site{% endblock %}
 
 {% block content %}
+
 {% if articles %}
     <!-- Blog section -->
-	<section class="blog-section spad" style="padding-top:13rem;">
+	<section class="blog-section spad" style="padding-top:15rem;">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-9 col-lg-8 col-md-7">
-				
+					{% if category %}
 					<div class="section-title text-white">
-						<h2>Dernier Articles</h2>
+						<h2>Articles dans la catégorie : {{ category }}</h2>
 					</div>
+					{% else %}
+					<div class="section-title text-white">
+						<h2>Derniers Articles</h2>
+					</div>
+					{% endif %}
 					<!--
 					<ul class="blog-filter">
 						<li><a href="#">Racing</a></li>
@@ -22,80 +46,58 @@
 						<li><a href="#">Online</a></li>
 					</ul>
 					-->
-                    {% for article in articles%}
-                    <!-- Blog item -->
+                    {% for article in articles %}
+					<!-- Blog item -->
 					<div class="blog-item">
-						<div class="blog-thumb">
-							<img class="img-art-shadow" src="{{ url_for('custom_static', id=article.id ,filename=article.desc_img_url) }}" alt="">
-						</div>
+						<a href="{{ url_for('article', id=article.name) }}" >
+							<div class="blog-thumb">
+								<img class="img-art-shadow" src="{{ url_for('custom_static', id=article.id ,filename=article.desc_img_url) }}" alt="">
+							</div>
+						</a>
 						<div class="blog-text text-box text-white">
-							<div class="top-meta">{{ article.date }}  /  in <a href="">Games</a></div>
-							<h3>{{ article.title }}</h3>
-							<p>{{ article.description }}</p>
-							<a href="{{ url_for('article',id=article.name) }}" class="read-more">Read More  <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#"/></a>
+							<div class="top-meta">{{ article.date }} / in <a href="#">Games</a></div>
+							<h3 ><a href="{{ url_for('article', id=article.name) }}" class="article-title">{{ article.title | safe }}</a></h3>
+							<p>{{ article.description | safe }}</p>
+							<a href="{{ url_for('article', id=article.name) }}" class="read-more">Read More <img src="{{ url_for('static', filename='img/icons/double-arrow.png') }}" alt="#" /></a>
 						</div>
 					</div>
-                    {% endfor %}
+					{% endfor %}
 				</div>
+				{% if not category %}
 				<div class="col-xl-3 col-lg-4 col-md-5 sidebar">
 					<div id="stickySidebar">
 						<div class="widget-item">
 							<h4 class="widget-title">Epinglé</h4>
 							<div class="trending-widget">
+								{% for pin in pinned %}
 								<div class="tw-item">
 									<div class="tw-thumb">
-										<img src="./img/blog-widget/1.jpg" alt="#">
+										<a href="{{ url_for('article', id=pin.name) }}" class="article-title"><img class="img-art-shadow" src="{{ url_for('custom_static', id=pin.id ,filename=pin.desc_img_url) }}" alt="#"></a>
 									</div>
 									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
+										<div class="tw-meta">{{ pin.date }}  /  in <a href="">Games</a></div>
+										<a href="{{ url_for('article', id=pin.name) }}" class="article-title"><h5>{{ pin.title | safe }}</h5></a>
 									</div>
 								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="./img/blog-widget/2.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="./img/blog-widget/3.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="./img/blog-widget/4.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
+								{% endfor %}
 							</div>
 						</div>
 						<div class="widget-item">
 							<div class="categories-widget">
 								<h4 class="widget-title">categories</h4>
 								<ul>
-									<li><a href="">Games</a></li>
-									<li><a href="">Gaming Tips & Tricks</a></li>
-									<li><a href="">Online Games</a></li>
-									<li><a href="">Team Games</a></li>
-									<li><a href="">Community</a></li>
-									<li><a href="">Uncategorized</a></li>
+									{% for category in categories %}
+									<li>
+										<a href="{{ url_for('articles_category', category=category.lower()) }}">{{ category }}</a>
+									</li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div>
 					</div>
 					</div>
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</section>

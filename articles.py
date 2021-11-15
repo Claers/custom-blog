@@ -2,10 +2,6 @@
 """
 import json
 
-class Paragraph():
-    """Paragraph class
-    """
-
 class Article():
     """Article class
     """

@@ -119,7 +119,7 @@
 				<div class="col-xl-9 col-lg-8 col-md-7">
 				
 					<div class="section-title text-white">
-						<h2>Dernier Articles</h2>
+						<h2>Derniers Articles</h2>
 					</div>
 					<!--
 					<ul class="blog-filter">
@@ -154,11 +154,11 @@
 								{% for pin in pinned %}
 								<div class="tw-item">
 									<div class="tw-thumb">
-										<img src="{{ url_for('custom_static', id=pin.id ,filename=pin.desc_img_url) }}" alt="#">
+										<a href="{{ url_for('article', id=pin.name) }}" class="article-title"><img class="img-art-shadow" src="{{ url_for('custom_static', id=pin.id ,filename=pin.desc_img_url) }}" alt="#"></a>
 									</div>
 									<div class="tw-text">
 										<div class="tw-meta">{{ pin.date }}  /  in <a href="">Games</a></div>
-										<h5>{{ pin.id }} - {{ pin.title }}</h5>
+										<a href="{{ url_for('article', id=pin.name) }}" class="article-title"><h5>{{ pin.title | safe }}</h5></a>
 									</div>
 								</div>
 								{% endfor %}
@@ -168,12 +168,11 @@
 							<div class="categories-widget">
 								<h4 class="widget-title">categories</h4>
 								<ul>
-									<li><a href="">Games</a></li>
-									<li><a href="">Gaming Tips & Tricks</a></li>
-									<li><a href="">Online Games</a></li>
-									<li><a href="">Team Games</a></li>
-									<li><a href="">Community</a></li>
-									<li><a href="">Uncategorized</a></li>
+									{% for category in categories %}
+									<li>
+										<a href="{{ url_for('articles_category', category=category.lower()) }}">{{ category }}</a>
+									</li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div>

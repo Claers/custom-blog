@@ -5,7 +5,24 @@
 	<meta charset="UTF-8">
 	<meta name="description" content="{% block description %}{% endblock %}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<meta name="google-site-verification" content="UlQFMH_LH-NeF38smPBenfnu4bKa8q9EzhcU4fXOTy0" />
+	<!-- Facebook Pixel Code -->
+	<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '411808949313001');
+		fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=411808949313001&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Facebook Pixel Code -->
 	{% block twicard %}{% endblock %}
 	{% block fbcard %}{% endblock %}
 	
@@ -70,6 +87,7 @@
 							-->
 						</li>
 						<li class="{{ article_active }}"><a href="{{ url_for('articles') }}">Articles</a></li>
+						<li class="{{ categories_active }}"><a href="{{ url_for('categories_list') }}">Catégories</a></li>
 						<li class="{{ contact_active }}"><a href="contact.html">Contact</a></li>
 					</ul>
 				</nav>
@@ -90,9 +108,9 @@
 			<ul class="main-menu footer-menu">
 				<li><a href="{{ url_for('index') }}">Home</a></li>
 				<li><a href="{{ url_for('index') }}">Games</a></li>
-				<li><a href="{{ url_for('index') }}">Articles</a></li>
-				<li><a href="{{ url_for('index') }}">News</a></li>
-				<li><a href="{{ url_for('index') }}">Contact</a></li>
+				<li class="{{ article_active }}"><a href="{{ url_for('articles') }}">Articles</a></li>
+				<li class="{{ categories_active }}"><a href="{{ url_for('categories_list') }}">Catégories</a></li>
+				<li class="{{ contact_active }}"><a href="contact.html">Contact</a></li>
 			</ul>
 			<div class="footer-social d-flex justify-content-center">
 				<a href="{{ facebook_link }}" target=”_blank”><i class="fa fa-facebook"></i></a>

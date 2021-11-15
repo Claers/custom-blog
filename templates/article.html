@@ -2,6 +2,26 @@
 
 {% block title %} {{ article.url_title }} {% endblock %}
 
+{% block twicard %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Flo_Okami">
+<meta name="twitter:creator" content="@Flo_Okami">
+<meta name="twitter:title" content="Flokami Blog - {{ article.title | safe }}">
+<meta name="twitter:description" content="{{ article.description | safe }}">
+<meta name="twitter:image" content="https://flokami.ovh{{ url_for('custom_static', id=article.id ,filename=article.img_url) }}">
+{% endblock %}
+
+{% block fbcard %}
+<meta property="og:url" content="https://flokami.ovh{{ url_for('article', id=article.name) }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Flokami Blog - {{ article.title | safe }}" />
+<meta property="og:description" content="{{ article.description | safe }}" />
+<meta property="og:image" content="https://flokami.ovh{{ url_for('custom_static', id=article.id ,filename=article.img_url) }}" />
+{% endblock %}
+
+{% block description %}{{ article.description }}{% endblock %}
+
+
 {% block content %}
 <!-- Hero section -->
 	<section class="hero-section overflow-hidden">
@@ -20,10 +40,10 @@
 	<!-- Hero section end-->
 
     <!-- Blog section -->
-	<section class="blog-section spad text-white d-flex" style="padding-top:13rem;">
+	<section class="blog-section spad text-white d-flex">
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-12 col-lg-8 col-md-7 article-section" style="text-align: center;">
+				<div class="col-xl-12 col-lg-12 col-md-12 article-section" style="text-align: center;">
 					{% for section in article.body %}
 						<div>{{ section["title"] | safe }}</div>
 						{% if section["content"] is not string %}

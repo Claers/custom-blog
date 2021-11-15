@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Acceuil {% endblock %}
+
+
+{% block content %}
+
+{% if categories %}
+    <!-- Blog section -->
+	<section class="blog-section spad" style="padding-top:15rem;">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 col-lg-8 col-md-7">
+					<div class="section-title text-white">
+						<h2>Catégories du site</h2>
+					</div>
+					<div class="categories-list">
+						<ul>
+						{% for category in categories %}
+						<li>
+							<a href="{{ url_for('articles_category', category=category.lower()) }}">{{ category }}</a>
+						</li>
+						{% endfor %}
+						</ul>
+					</div>
+					<!--
+					<ul class="blog-filter">
+						<li><a href="#">Racing</a></li>
+						<li><a href="#">Shooters</a></li>
+						<li><a href="#">Strategy</a></li>
+						<li><a href="#">Online</a></li>
+					</ul>
+					-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+    {% endif %}
+{% endblock %}
